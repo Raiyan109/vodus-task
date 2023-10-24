@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Vodus</title>
+</head>
+
+<body>
+
+
+    <!-- <div class="wrapper" id="card-container">
+        
+    </div> -->
+
+    <div class="card-container" id="card-container">
+        <!-- <div class="card"> -->
+        <!-- <p>A glass-like card to demonstrate the <strong>Glassmorphism UI design</strong> trend.</p>
+            <p class="card-footer">Created by Rahul C.</p> -->
+        <!-- </div> -->
+    </div>
+
+    <!-- <div id="message"></div>
+    <button id="submit">Submit</button> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            const url = 'https://hiking-warehouse-server.vercel.app/api/items';
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'get',
+                success: function (result) {
+                    $.each(result, function (i, item) {
+                        const card = $('<div>').addClass('card')
+                        card.html(`
+                           
+                            <div class="card-content">
+                                <img class="card-img" src="${item.img}" alt="${item.title}">
+                                <h3 class="title">Name: ${item.name}</h3>
+                                <p class="title">Description: ${item.desc}</p>
+                                <p class="title">Price: $ ${item.price}</p>
+                            </div>
+                        `);
+
+                        $('#card-container').append(card);
+                    });
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        });
+    </script>
+
+    <!-- <script>
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                const url = 'https://hiking-warehouse-server.vercel.app/api/items'
+
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (result) {
+                        const table = $('<table>').append('<tr><td>Id</td><td>Name</td><td>Price</td></tr>');
+
+                        for (i = 0; i < result.length; i++) {
+                            table.append('<tr><td>' + result[i]['_id'] + '</td><td>' + result[i]['name'] + '</td><td>' + result[i]['price'] + '</td></tr>')
+                        }
+
+                        $('#message').html(table)
+                    },
+                    error: function (error) {
+                        alert(error)
+                    }
+                })
+            })
+        })
+    </script> -->
+    <script src="script.js"></script>
+</body>
+
+</html>
